@@ -5,14 +5,14 @@
 > Feel free to delete this text.
 
 
-# Title of your Project
+# The Influence of Time on Movie Ratings: Nostalgia vs. Recency Bias
 *Describe the purpose of this project* 
 
 ## Motivation
 
-*Provide background/motivation for your project*
+*This study aims to examine whether the passage of time influences movie ratings. The hypothesis is that older movies may have higher ratings due to nostalgia bias (viewers rating them with a sense of attachment) or selective survival bias (only the best movies from the past remain widely discussed and rated). Conversely, newer films might be subject to recency bias, where immediate reactions (positive or negative) dominate ratings.*
 
-**Mention your research question**
+**To what extent does the release year of IMDb movies impact their average ratings on the IMDb platform?**
 
 ## Data
 

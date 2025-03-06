@@ -25,7 +25,7 @@ def get_token():
     if response.status_code == 200:
         return response.json().get("access_token")
     else:
-        print(f"Errore token: {response.status_code}, {response.text}")
+        print(f"❌ Errore token: {response.status_code}, {response.text}")
         return None
 
 @app.route('/scrape_user_tracks', methods=['GET'])
@@ -68,7 +68,7 @@ def scrape_user_tracks():
                         date_obj = datetime.strptime(created_at, "%Y/%m/%d %H:%M:%S %z")
                         track_dates.append(date_obj)
                     except ValueError as e:
-                        print(f"Errore parsing data: {created_at} - {e}")
+                        print(f"⚠️ Errore parsing data: {created_at} - {e}")
 
             frequency = {}
             for date in track_dates:
@@ -82,8 +82,11 @@ def scrape_user_tracks():
                 "frequency": frequency
             })
     
-    # Salva i dati in un file JSON
+    # Salva i dati in un file JSON con debug dettagliato
     file_path = os.path.join(os.getcwd(), "soundcloud_data.json")
+    print(f"📂 Cartella corrente: {os.getcwd()}")
+    print(f"💾 Tentativo di salvataggio in: {file_path}")
+    
     try:
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump({"users_data": all_user_data}, f, ensure_ascii=False, indent=4)

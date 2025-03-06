@@ -2,54 +2,10 @@ import requests
 from datetime import datetime
 import pandas as pd
 
-
 # Authentication credentials
-CLIENT_ID = "tcgOlBvvbQxa9w2fbg4B2reO57im5vkn"
-CLIENT_SECRET = "SUNBc6ffHzrm1QZvYdPCxDdlIM1v4X1Q"
+CLIENT_ID = "YOvvbQxa9w2fbg4B2reO57im5vkn"
+CLIENT_SECRET = "NBc6ffHzrm1QZvYdPCxDdlIM1v4X1Q"
 
-def get_token():
-    # Make a POST request to obtain the token
-    req = requests.post(
-        'https://api.soundcloud.com/oauth2/token',
-        params={
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'client_id': CLIENT_ID,
-            'client_secret': CLIENT_SECRET,
-            'grant_type': 'client_credentials'
-        }
-    )
-    return req.json()
-
-# Get the authentication token
-auth_data = get_token()
-token = auth_data['access_token']
-print("Token:", token)
-
-# Search for tracks using the query "lofi"
-search_query = "lofi"
-response = requests.get(
-    "https://api.soundcloud.com/tracks",
-    headers={"Authorization": f"Bearer {token}"},
-    params={"q": search_query}
-)
-
-# Convert the response to JSON format
-result = response.json()
-
-# Print the result and its type
-print("Result:", result)
-print("Type of result:", type(result))
-
-# If 'result' is a list, iterate over each element to print the track titles
-if isinstance(result, list):
-    for track in result:
-        if isinstance(track, dict):
-            title = track.get('title')
-            print("Title:", title)
-        else:
-            print("Unexpected element:", track)
-else:
-    print("Unexpected response:", result)
 # Function to obtain an access token
 def get_token():
     req = requests.post(
@@ -94,17 +50,9 @@ def get_artist_tracks(user_id):
         return None
 
 # Function to convert a date into a week number
-
 def get_week_from_date(date_str):
-    try:
-        # ✅ Correct format for SoundCloud timestamps
-        date_obj = datetime.strptime(date_str, "%Y/%m/%d %H:%M:%S %z")
-        return date_obj.strftime("%Y-W%U")  # Convert to Year-Week format
-    except ValueError as e:
-        print(f"❌ ERROR: Could not parse date '{date_str}' - {e}")
-        return None
-
-
+    date_obj = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S%z")
+    return date_obj.strftime("%Y-W%U")  # Year + Week Number
 
 # Function to analyze weekly upload frequency
 def analyze_upload_frequency(user_id):
